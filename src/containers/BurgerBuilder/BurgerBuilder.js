@@ -45,39 +45,6 @@ class BurgerBuilder extends Component {
     return sum > 0
   }
 
-  // addIngredientHandler = (type) => {
-  //   const oldCount = this.state.ingredients[type]
-  //   const updateCount = oldCount + 1
-  //   const updatedIngredients = {
-  //     ...this.state.ingredients,
-  //   }
-
-  //   updatedIngredients[type] = updateCount
-  //   const priceAddition = INGREDIENT_PRICE[type]
-  //   const oldPrice = this.state.totalPrice
-  //   const newPrice = oldPrice + priceAddition
-  //   this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
-  //   this.updatePurchaseState(updatedIngredients)
-  // }
-
-  // removeIngredientHandler = (type) => {
-  //   const oldCount = this.state.ingredients[type]
-  //   if (oldCount <= 0) {
-  //     return
-  //   }
-  //   const updateCount = oldCount - 1
-  //   const updatedIngredients = {
-  //     ...this.state.ingredients,
-  //   }
-
-  //   updatedIngredients[type] = updateCount
-  //   const priceDeduction = INGREDIENT_PRICE[type]
-  //   const oldPrice = this.state.totalPrice
-  //   const newPrice = oldPrice - priceDeduction
-  //   this.setState({ totalPrice: newPrice, ingredients: updatedIngredients })
-  //   this.updatePurchaseState(updatedIngredients)
-  // }
-
   purchaseHandler = () => {
     this.setState({ purchasing: true })
   }
@@ -87,22 +54,7 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    // alert("You continue")
-
-    const queryParams = []
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[i])
-      )
-    }
-    queryParams.push("price=" + this.state.totalPrice)
-    const queryString = queryParams.join("&")
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString,
-    })
+    this.props.history.push("/checkout")
   }
 
   render() {
