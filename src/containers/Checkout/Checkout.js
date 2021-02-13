@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Route } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary"
 import ContactData from "./ContactData/ContactData"
 import { connect } from "react-redux"
@@ -14,19 +14,23 @@ class Checkout extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <CheckoutSummary
-          ingredients={this.props.ings}
-          checkoutCancelled={this.checkoutCancelledHandler}
-          checkoutContinued={this.checkoutContinuedHandler}
-        />
-        <Route
-          path={this.props.match.path + "/contact-data"}
-          component={ContactData}
-        />
-      </div>
-    )
+    let summery = <Redirect to="/" />
+    if (this.props.ings) {
+      summery = (
+        <div>
+          <CheckoutSummary
+            ingredients={this.props.ings}
+            checkoutCancelled={this.checkoutCancelledHandler}
+            checkoutContinued={this.checkoutContinuedHandler}
+          />
+          <Route
+            path={this.props.match.path + "/contact-data"}
+            component={ContactData}
+          />
+        </div>
+      )
+    }
+    return summery
   }
 }
 
