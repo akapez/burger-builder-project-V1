@@ -43,40 +43,43 @@ export const purchaseInit = () => {
   }
 }
 
-export const fetchOrderSuccess = (orders) => {
+export const fetchOrdersSuccess = (orders) => {
   return {
     type: actionTypes.FETCH_ORDER_SUCCESS,
     orders: orders,
   }
 }
 
-export const fetchOrderFail = (error) => {
+export const fetchOrdersFail = (error) => {
   return {
     type: actionTypes.FETCH_ORDER_FAIL,
     error: error,
   }
 }
 
-export const fetchOrderStart = () => {
+export const fetchOrdersStart = () => {
   return {
     type: actionTypes.FETCH_ORDER_START,
   }
 }
 
-export const fetchOrder = () => {
+export const fetchOrders = (token) => {
   return (dispatch) => {
-    dispatch(fetchOrderStart())
+    dispatch(fetchOrdersStart())
     axios
-      .get("/orders.json")
+      .get("/orders.json?auth=" + token)
       .then((res) => {
         const fetchedOrders = []
         for (let key in res.data) {
-          fetchedOrders.push({ ...res.data[key], id: key })
+          fetchedOrders.push({
+            ...res.data[key],
+            id: key,
+          })
         }
-        dispatch(fetchOrderSuccess(fetchedOrders))
+        dispatch(fetchOrdersSuccess(fetchedOrders))
       })
       .catch((err) => {
-        dispatch(fetchOrderFail(err))
+        dispatch(fetchOrdersFail(err))
       })
   }
 }

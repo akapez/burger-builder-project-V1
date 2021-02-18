@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes"
 import axios from "../../axios-order"
+require("dotenv").config()
 
 export const addIngredient = (name) => {
   return {
@@ -28,12 +29,10 @@ export const fetchIngredientFailed = () => {
   }
 }
 
-export const initIngredients = (ingredients) => {
+export const initIngredients = () => {
   return (dispatch) => {
     axios
-      .get(
-        "https://burger-builder-project-7e91a-default-rtdb.firebaseio.com/ingredients.json"
-      )
+      .get(`${process.env.REACT_APP_DATABASE_URL}/ingredients.json`)
       .then((response) => {
         dispatch(setIngredients(response.data))
       })
