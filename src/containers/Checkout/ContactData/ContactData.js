@@ -7,6 +7,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner"
 import Input from "../../../components/UI/Input/Input"
 import withErrorHandler from "../../../hoc/WithErrorHandler/WithErrorHandler"
 import * as actions from "../../../store/actions/index"
+import { updateObject, checkValidity } from "../../../shared/utility"
 
 class ContactData extends Component {
   state = {
@@ -115,42 +116,21 @@ class ContactData extends Component {
     this.props.onOrderBurger(order, this.props.token)
   }
 
-  checkValidity(value, rules) {
-    let isValid = true
-
-    if (!rules) {
-      return true
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid
-    }
-
-    return isValid
-  }
-
-  inputChangeHandler = (e, inputIdentifier) => {
-    const updateOrderForm = {
-      ...this.state.orderForm,
-    }
-    const updateFormElement = {
-      ...updateOrderForm[inputIdentifier],
-    }
-    updateFormElement.value = e.target.value
-    updateFormElement.valid = this.checkValidity(
-      updateFormElement.value,
-      updateFormElement.validation
+  inputChangeHandler = (event, inputIdentifier) => {
+    const updateFormElement = updateObject(
+      this.state.orderForm[inputIdentifier],
+      {
+        value: event.target.value,
+        valid: checkValidity(
+          event.target.value,
+          this.state.orderForm[inputIdentifier].validation
+        ),
+        touched: true,
+      }
     )
-    updateFormElement.touched = true
-    updateOrderForm[inputIdentifier] = updateFormElement
+    const updateOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updateFormElement,
+    })
 
     let formIsValid = true
     for (let inputIdentifier in updateOrderForm) {
