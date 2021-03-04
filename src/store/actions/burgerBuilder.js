@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes"
-import axios from "../../axios-order"
-require("dotenv").config()
+
+
 
 export const addIngredient = (name) => {
   return {
@@ -30,14 +30,7 @@ export const fetchIngredientFailed = () => {
 }
 
 export const initIngredients = () => {
-  return (dispatch) => {
-    axios
-      .get(`${process.env.REACT_APP_DATABASE_URL}/ingredients.json`)
-      .then((response) => {
-        dispatch(setIngredients(response.data))
-      })
-      .catch((error) => {
-        dispatch(fetchIngredientFailed())
-      })
+  return {
+    type: actionTypes.INIT_INGREDIENTS
   }
 }
