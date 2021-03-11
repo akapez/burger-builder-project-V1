@@ -1,31 +1,29 @@
-import React, { useEffect} from "react"
-import { connect } from "react-redux"
-import Order from "../../components/Order/CheckoutSummary/Order"
-import axios from "../../axios-order"
-import withErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler"
-import * as actions from "../../store/actions/index"
-import Spinner from "../../components/UI/Spinner/Spinner"
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import Order from '../../components/Order/CheckoutSummary/Order'
+import axios from '../../axios-order'
+import withErrorHandler from '../../hoc/WithErrorHandler/WithErrorHandler'
+import * as actions from '../../store/actions/index'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
-const Orders = props => {
-
-  const {onFetchOrders} = props
+const Orders = (props) => {
+  const { onFetchOrders } = props
 
   useEffect(() => {
     onFetchOrders(props.token, props.userId)
   }, [onFetchOrders])
-   
-    let orders = <Spinner />
-    if (!props.loading) {
-      orders = props.orders.map((order) => (
-        <Order
-          key={order.id}
-          ingredients={order.ingredients}
-          price={order.price}
-        />
-      ))
-    }
-    return <div>{orders}</div>
-  
+
+  let orders = <Spinner />
+  if (!props.loading) {
+    orders = props.orders.map((order) => (
+      <Order
+        key={order.id}
+        ingredients={order.ingredients}
+        price={order.price}
+      />
+    ))
+  }
+  return <div>{orders}</div>
 }
 
 const mapStateToProps = (state) => {

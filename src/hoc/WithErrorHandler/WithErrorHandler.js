@@ -4,8 +4,8 @@ import Aux from '../Aux'
 import useHttpError from '../../hooks/http-error'
 
 const withErrorHandler = (WrappedComponent, axios) => {
-  return props => {
-    const [error, clearError] =  useHttpError(axios)
+  return (props) => {
+    const [error, clearError] = useHttpError(axios)
 
     return (
       <Aux>
@@ -14,9 +14,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
         </Modal>
         <WrappedComponent {...props} />
       </Aux>
-    );
-  };
-};
+    )
+  }
+}
 
-export default withErrorHandler;
-
+export default withErrorHandler

@@ -1,5 +1,4 @@
-import * as actionTypes from "./actionTypes"
-
+import * as actionTypes from './actionTypes'
 
 export const authStart = () => {
   return {
@@ -32,26 +31,25 @@ export const logout = () => {
 }
 
 export const logoutSucceed = () => {
-  return{
-    type: actionTypes.AUTH_LOGOUT
+  return {
+    type: actionTypes.AUTH_LOGOUT,
   }
 }
 
 export const checkAuthTimeout = (expirationTime) => {
   return {
     type: actionTypes.AUTH_CHECK_TIMEOUT,
-    expirationTime: expirationTime
+    expirationTime: expirationTime,
   }
 }
 
 export const auth = (email, password, isSignup) => {
-  return{
+  return {
     type: actionTypes.AUTH_USER,
     email: email,
     password: password,
-    isSignup: isSignup
+    isSignup: isSignup,
   }
-
 }
 
 export const setAuthRedirectPath = (path) => {
@@ -63,6 +61,6 @@ export const setAuthRedirectPath = (path) => {
 
 export const authCheckState = () => {
   return {
-    type: actionTypes.AUTH_CHECK_INITIAL_STATE
+    type: actionTypes.AUTH_CHECK_INITIAL_STATE,
   }
 }

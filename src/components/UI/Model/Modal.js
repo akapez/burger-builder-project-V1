@@ -5,7 +5,6 @@ import Aux from '../../../hoc/Aux'
 import Backdrop from '../Backdrop/Backdrop'
 
 const Modal = (props) => {
- 
   return (
     <Aux>
       <Backdrop show={props.show} clicked={props.modalClosed} />
@@ -22,7 +21,9 @@ const Modal = (props) => {
   )
 }
 
-export default React.memo(Modal, (prevProps, nextProps) => 
-  nextProps.show === prevProps.show &&
+export default React.memo(
+  Modal,
+  (prevProps, nextProps) =>
+    nextProps.show === prevProps.show &&
     nextProps.children === prevProps.children
 )

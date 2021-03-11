@@ -1,5 +1,4 @@
-import * as actionTypes from "./actionTypes"
-
+import * as actionTypes from './actionTypes'
 
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
@@ -26,7 +25,7 @@ export const purchaseBurger = (orderData, token) => {
   return {
     type: actionTypes.PURCHASE_BURGER,
     orderData: orderData,
-    token: token
+    token: token,
   }
 }
 
@@ -57,9 +56,9 @@ export const fetchOrdersStart = () => {
 }
 
 export const fetchOrders = (token, userId) => {
-  return{
+  return {
     type: actionTypes.FETCH_ORDER,
     token: token,
-    userId: userId
+    userId: userId,
   }
 }

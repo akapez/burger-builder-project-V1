@@ -13,7 +13,7 @@ export const checkValidity = (value, rules) => {
   }
 
   if (rules.required) {
-    isValid = value.trim() !== "" && isValid
+    isValid = value.trim() !== '' && isValid
   }
 
   if (rules.minLength) {

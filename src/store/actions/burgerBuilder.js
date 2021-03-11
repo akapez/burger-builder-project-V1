@@ -1,6 +1,4 @@
-import * as actionTypes from "./actionTypes"
-
-
+import * as actionTypes from './actionTypes'
 
 export const addIngredient = (name) => {
   return {
@@ -31,6 +29,6 @@ export const fetchIngredientFailed = () => {
 
 export const initIngredients = () => {
   return {
-    type: actionTypes.INIT_INGREDIENTS
+    type: actionTypes.INIT_INGREDIENTS,
   }
 }
